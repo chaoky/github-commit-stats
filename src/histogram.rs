@@ -1,6 +1,5 @@
 use plotters::prelude::*;
-
-use crate::app::LanguageStats;
+use crate::github::LanguageStats;
 
 pub fn draw(
     language_stats: &[(String, LanguageStats)],
