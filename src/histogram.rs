@@ -5,7 +5,7 @@ pub fn draw(
     language_stats: &[(String, LanguageStats)],
     picker: impl FnMut(&(String, LanguageStats)) -> (String, usize),
     color: RGBColor,
-    file_name: &str,
+    title: &str,
 ) {
     let data = {
         let mut data: Vec<_> = language_stats.iter().map(picker).collect();
@@ -31,10 +31,11 @@ pub fn draw(
         big.to_vec()
     };
 
-    let root = BitMapBackend::new(file_name, (900, 600)).into_drawing_area();
+    let file_name = format!("{}.png", title.replace(' ', "_"));
+    let root = BitMapBackend::new(&file_name, (900, 600)).into_drawing_area();
     root.fill(&WHITE).unwrap();
     let mut chart = ChartBuilder::on(&root)
-        .caption("Language Diff Stats", ("sans-serif", 50.0))
+        .caption(title, ("sans-serif", 50.0))
         .x_label_area_size(50)
         .y_label_area_size(90)
         .build_cartesian_2d(
