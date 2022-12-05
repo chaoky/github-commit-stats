@@ -1,9 +1,8 @@
 use plotters::prelude::*;
-use crate::github::LanguageStats;
 
-pub fn draw(
-    language_stats: &[(String, LanguageStats)],
-    picker: impl FnMut(&(String, LanguageStats)) -> (String, usize),
+pub fn draw<T>(
+    language_stats: &[T],
+    picker: impl FnMut(&T) -> (String, usize),
     color: RGBColor,
     title: &str,
 ) {
@@ -12,21 +11,20 @@ pub fn draw(
 
         data.sort_by(|(_, a), (_, b)| b.cmp(a));
 
-        let (mut big, small) = {
+        let (big, small) = {
             let split_point = data
                 .iter()
                 .position(|(_, stats)| (*stats as f64) < (data[0].1 as f64) * 0.01)
                 .unwrap();
             data.split_at_mut(split_point)
         };
+        let mut big = big.to_vec();
 
-        let unknown_pos = big
-            .iter()
-            .position(|(lang, _)| lang.eq(&"unknown"))
-            .unwrap();
         let others = small.iter().fold(0, |acc, (_, stats)| acc + stats);
-        big[unknown_pos].0 = "Others".to_string();
-        big[unknown_pos].1 += others;
+        match big.iter().position(|(lang, _)| lang.eq(&"Others")) {
+            Some(pos) => big[pos].1 += others,
+            None => big.insert(0, ("Others".to_string(), others)),
+        };
 
         big.to_vec()
     };

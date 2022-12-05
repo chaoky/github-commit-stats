@@ -1,4 +1,5 @@
 use futures::prelude::*;
+use hyperpolyglot::Language;
 use octocrab::{
     models::{repos::RepoCommit, Repository},
     Octocrab,
@@ -29,20 +30,17 @@ impl Client {
         Self { client, temp_dir }
     }
 
-    pub async fn run(&self) -> Vec<(String, LanguageStats)> {
+    pub async fn run(&self) -> Vec<(Option<Language>, LanguageStats)> {
         self.repos()
             .flat_map_unordered(None, |repo| Box::pin(self.list_commits(repo)))
             .flat_map_unordered(None, |commit| Box::pin(self.commit_details(commit)))
-            .fold(
-                Vec::<(Language, LanguageStats)>::new(),
-                |mut acc, (lang, stats)| async move {
-                    match acc.iter().position(|(acc_lang, _)| acc_lang == &lang) {
-                        Some(pos) => acc[pos].1 += stats,
-                        None => acc.push((lang, stats)),
-                    };
-                    acc
-                },
-            )
+            .fold(Vec::new(), |mut acc, (lang, stats)| async move {
+                match acc.iter().position(|(acc_lang, _)| acc_lang == &lang) {
+                    Some(pos) => acc[pos].1 += stats,
+                    None => acc.push((lang, stats)),
+                };
+                acc
+            })
             .await
     }
 
@@ -77,7 +75,7 @@ impl Client {
     fn commit_details(
         &self,
         commit: RepoCommit,
-    ) -> impl Stream<Item = (Language, LanguageStats)> + '_ {
+    ) -> impl Stream<Item = (Option<Language>, LanguageStats)> + '_ {
         stream::once(async move {
             self.client
                 ._get(&commit.url, None::<&()>)
@@ -112,9 +110,7 @@ impl Client {
             (
                 hyperpolyglot::detect(&path)
                     .unwrap()
-                    .map(|x| x.language())
-                    .unwrap_or("unknown")
-                    .to_string(),
+                    .and_then(|x| Language::try_from(x.language()).ok()),
                 LanguageStats {
                     additions: file.get("additions").unwrap().as_u64().unwrap() as usize,
                     deletions: file.get("deletions").unwrap().as_u64().unwrap() as usize,
@@ -125,7 +121,6 @@ impl Client {
     }
 }
 
-type Language = String;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct LanguageStats {
     pub additions: usize,
