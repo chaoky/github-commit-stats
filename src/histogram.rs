@@ -1,22 +1,15 @@
 use plotters::prelude::*;
 
-pub fn draw<T>(
-    language_stats: &[T],
-    picker: impl FnMut(&T) -> (String, usize),
-    color: RGBColor,
-    title: &str,
-) {
+pub fn draw(mut language_stats: Vec<(String, usize)>, color: RGBColor, title: &str) {
     let data = {
-        let mut data: Vec<_> = language_stats.iter().map(picker).collect();
-
-        data.sort_by(|(_, a), (_, b)| b.cmp(a));
+        language_stats.sort_by(|(_, a), (_, b)| b.cmp(a));
 
         let (big, small) = {
-            let split_point = data
+            let split_point = language_stats
                 .iter()
-                .position(|(_, stats)| (*stats as f64) < (data[0].1 as f64) * 0.01)
-                .unwrap();
-            data.split_at_mut(split_point)
+                .position(|(_, stats)| (*stats as f64) < (language_stats[0].1 as f64) * 0.01)
+                .unwrap_or(language_stats.len());
+            language_stats.split_at_mut(split_point)
         };
         let mut big = big.to_vec();
 
@@ -25,6 +18,7 @@ pub fn draw<T>(
             Some(pos) => big[pos].1 += others,
             None => big.insert(0, ("Others".to_string(), others)),
         };
+        big.sort_by(|(_, a), (_, b)| b.cmp(a));
 
         big.to_vec()
     };

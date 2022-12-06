@@ -5,6 +5,7 @@ mod histogram;
 use crate::github::LanguageStats;
 use clap::Parser;
 use hyperpolyglot::Language;
+use itertools::Itertools;
 use plotters::style::*;
 use std::fs;
 
@@ -25,7 +26,9 @@ async fn main() {
             .into_iter()
             .map(|(lang, stats)| (Language::try_from(lang.as_str()).ok(), stats))
             .collect(),
+
             (None, Some(personal_token)) => github::Client::new(&personal_token).run().await,
+
             _ => {
                 panic!("please provide either a personal token or a path to the cached file")
             }
@@ -43,35 +46,41 @@ async fn main() {
     });
 
     histogram::draw(
-        &language_stats,
-        |(lang, stats)| {
-            (
-                lang.map(|x| x.name).unwrap_or("Others").to_string(),
-                stats.changes,
-            )
-        },
+        language_stats
+            .iter()
+            .map(|(lang, stats)| {
+                (
+                    lang.map(|x| x.name).unwrap_or("Others").to_string(),
+                    stats.changes,
+                )
+            })
+            .collect_vec(),
         YELLOW,
         "stats changes",
     );
     histogram::draw(
-        &language_stats,
-        |(lang, stats)| {
-            (
-                lang.map(|x| x.name).unwrap_or("Others").to_string(),
-                stats.changes,
-            )
-        },
+        language_stats
+            .iter()
+            .map(|(lang, stats)| {
+                (
+                    lang.map(|x| x.name).unwrap_or("Others").to_string(),
+                    stats.changes,
+                )
+            })
+            .collect_vec(),
         GREEN,
         "stats additions",
     );
     histogram::draw(
-        &language_stats,
-        |(lang, stats)| {
-            (
-                lang.map(|x| x.name).unwrap_or("Others").to_string(),
-                stats.changes,
-            )
-        },
+        language_stats
+            .iter()
+            .map(|(lang, stats)| {
+                (
+                    lang.map(|x| x.name).unwrap_or("Others").to_string(),
+                    stats.changes,
+                )
+            })
+            .collect_vec(),
         RED,
         "stats deletions",
     );
