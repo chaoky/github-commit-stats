@@ -36,6 +36,9 @@ async fn main() {
 
     language_stats.retain(|(lang, _)| {
         lang.map(|x| {
+            if args.hidden.contains(&x.name.into()) {
+               return false;
+            };
             let categories = args.categories.clone();
             if categories.is_empty() {
                 return true;
@@ -64,7 +67,7 @@ async fn main() {
             .map(|(lang, stats)| {
                 (
                     lang.map(|x| x.name).unwrap_or("Others").to_string(),
-                    stats.changes,
+                    stats.additions,
                 )
             })
             .collect_vec(),
@@ -77,7 +80,7 @@ async fn main() {
             .map(|(lang, stats)| {
                 (
                     lang.map(|x| x.name).unwrap_or("Others").to_string(),
-                    stats.changes,
+                    stats.deletions,
                 )
             })
             .collect_vec(),

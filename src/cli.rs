@@ -6,8 +6,11 @@ pub struct Args {
     pub personal_token: Option<String>,
     #[arg(long)]
     pub cache_path: Option<String>,
-    #[arg(short, long, value_enum, num_args = 0.., default_value = "programming")]
+    #[arg(long, value_enum, num_args = 0.., default_value = "programming")]
     pub categories: Vec<LanguageType>,
+    #[arg(long, num_args = 0.., default_value = "")]
+    pub hidden: Vec<String>,
+
 }
 
 #[derive(Clone, Debug, ValueEnum, PartialEq)]
