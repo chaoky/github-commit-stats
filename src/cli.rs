@@ -10,6 +10,8 @@ pub struct Args {
     pub categories: Vec<LanguageType>,
     #[arg(long, num_args = 0.., default_value = "")]
     pub hidden: Vec<String>,
+    #[arg(long, default_value = "100")]
+    pub group_threshold: usize,
 
 }
 

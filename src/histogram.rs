@@ -1,13 +1,18 @@
 use plotters::prelude::*;
 
-pub fn draw(mut language_stats: Vec<(String, usize)>, color: RGBColor, title: &str) {
+pub fn draw(
+    mut language_stats: Vec<(String, usize)>,
+    color: RGBColor,
+    title: &str,
+    group_threshold: usize,
+) {
     let data = {
         language_stats.sort_by(|(_, a), (_, b)| b.cmp(a));
 
         let (big, small) = {
             let split_point = language_stats
                 .iter()
-                .position(|(_, stats)| (*stats as f64) < (language_stats[0].1 as f64) * 0.01)
+                .position(|(_, stats)| *stats < language_stats[0].1.checked_div(group_threshold).unwrap_or(0))
                 .unwrap_or(language_stats.len());
             language_stats.split_at_mut(split_point)
         };

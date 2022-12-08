@@ -37,7 +37,7 @@ async fn main() {
     language_stats.retain(|(lang, _)| {
         lang.map(|x| {
             if args.hidden.contains(&x.name.into()) {
-               return false;
+                return false;
             };
             let categories = args.categories.clone();
             if categories.is_empty() {
@@ -45,7 +45,7 @@ async fn main() {
             }
             categories.contains(&x.language_type.into())
         })
-        .unwrap_or(true)
+        .unwrap_or(args.group_threshold != 0)
     });
 
     histogram::draw(
@@ -60,6 +60,7 @@ async fn main() {
             .collect_vec(),
         YELLOW,
         "stats changes",
+        args.group_threshold,
     );
     histogram::draw(
         language_stats
@@ -73,6 +74,7 @@ async fn main() {
             .collect_vec(),
         GREEN,
         "stats additions",
+        args.group_threshold,
     );
     histogram::draw(
         language_stats
@@ -86,5 +88,6 @@ async fn main() {
             .collect_vec(),
         RED,
         "stats deletions",
+        args.group_threshold,
     );
 }
