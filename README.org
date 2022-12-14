@@ -1,0 +1,15 @@
+#+title: Readme
+#+STARTUP: inlineimages
+
+* preview
+#+begin_src bash
+cargo run -- --cache-path cache.json --categories programming --hidden JavaScript --group-threshold 0
+#+end_src
+
+** deletions
+    [[./stats_deletions.png]]
+
+** additions
+[[./stats_additions.png]]
+** changes
+[[./stats_changes.png]]

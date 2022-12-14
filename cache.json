@@ -1,0 +1,322 @@
+[
+    [
+        "Shell",
+        {
+            "additions": 471,
+            "deletions": 181,
+            "changes": 652
+        }
+    ],
+    [
+        "JavaScript",
+        {
+            "additions": 66832,
+            "deletions": 716439,
+            "changes": 783271
+        }
+    ],
+    [
+        "HTML",
+        {
+            "additions": 10968,
+            "deletions": 8717,
+            "changes": 19685
+        }
+    ],
+    [
+        "Scala",
+        {
+            "additions": 2353,
+            "deletions": 552,
+            "changes": 2905
+        }
+    ],
+    [
+        "Emacs Lisp",
+        {
+            "additions": 1737,
+            "deletions": 1139,
+            "changes": 2876
+        }
+    ],
+    [
+        "Ignore List",
+        {
+            "additions": 638,
+            "deletions": 37,
+            "changes": 675
+        }
+    ],
+    [
+        "unknown",
+        {
+            "additions": 41936,
+            "deletions": 22818,
+            "changes": 64754
+        }
+    ],
+    [
+        "YAML",
+        {
+            "additions": 127805,
+            "deletions": 26432,
+            "changes": 154237
+        }
+    ],
+    [
+        "JSON",
+        {
+            "additions": 139107,
+            "deletions": 15507,
+            "changes": 154614
+        }
+    ],
+    [
+        "Makefile",
+        {
+            "additions": 5,
+            "deletions": 4,
+            "changes": 9
+        }
+    ],
+    [
+        "Rust",
+        {
+            "additions": 35800,
+            "deletions": 2091,
+            "changes": 37891
+        }
+    ],
+    [
+        "Markdown",
+        {
+            "additions": 3396,
+            "deletions": 1701,
+            "changes": 5097
+        }
+    ],
+    [
+        "Vue",
+        {
+            "additions": 3464,
+            "deletions": 1962,
+            "changes": 5426
+        }
+    ],
+    [
+        "Haskell",
+        {
+            "additions": 71,
+            "deletions": 15,
+            "changes": 86
+        }
+    ],
+    [
+        "Git Attributes",
+        {
+            "additions": 6,
+            "deletions": 0,
+            "changes": 6
+        }
+    ],
+    [
+        "TOML",
+        {
+            "additions": 13624,
+            "deletions": 4135,
+            "changes": 17759
+        }
+    ],
+    [
+        "Nix",
+        {
+            "additions": 1,
+            "deletions": 1,
+            "changes": 2
+        }
+    ],
+    [
+        "Text",
+        {
+            "additions": 3902,
+            "deletions": 2446,
+            "changes": 6348
+        }
+    ],
+    [
+        "TypeScript",
+        {
+            "additions": 9838,
+            "deletions": 76762,
+            "changes": 86600
+        }
+    ],
+    [
+        "CSS",
+        {
+            "additions": 52369,
+            "deletions": 10677,
+            "changes": 63046
+        }
+    ],
+    [
+        "JSON with Comments",
+        {
+            "additions": 517,
+            "deletions": 57,
+            "changes": 574
+        }
+    ],
+    [
+        "XML",
+        {
+            "additions": 12139,
+            "deletions": 3631,
+            "changes": 15770
+        }
+    ],
+    [
+        "Dockerfile",
+        {
+            "additions": 254,
+            "deletions": 128,
+            "changes": 382
+        }
+    ],
+    [
+        "Org",
+        {
+            "additions": 2130,
+            "deletions": 297,
+            "changes": 2427
+        }
+    ],
+    [
+        "GraphQL",
+        {
+            "additions": 13417,
+            "deletions": 7872,
+            "changes": 21289
+        }
+    ],
+    [
+        "SVG",
+        {
+            "additions": 106432,
+            "deletions": 105637,
+            "changes": 212069
+        }
+    ],
+    [
+        "SQL",
+        {
+            "additions": 6310,
+            "deletions": 6,
+            "changes": 6316
+        }
+    ],
+    [
+        "INI",
+        {
+            "additions": 4,
+            "deletions": 0,
+            "changes": 4
+        }
+    ],
+    [
+        "CSV",
+        {
+            "additions": 13,
+            "deletions": 19,
+            "changes": 32
+        }
+    ],
+    [
+        "SCSS",
+        {
+            "additions": 14157,
+            "deletions": 14040,
+            "changes": 28197
+        }
+    ],
+    [
+        "fish",
+        {
+            "additions": 1021,
+            "deletions": 114,
+            "changes": 1135
+        }
+    ],
+    [
+        "Python",
+        {
+            "additions": 138,
+            "deletions": 0,
+            "changes": 138
+        }
+    ],
+    [
+        "desktop",
+        {
+            "additions": 5,
+            "deletions": 0,
+            "changes": 5
+        }
+    ],
+    [
+        "Git Config",
+        {
+            "additions": 6,
+            "deletions": 6,
+            "changes": 12
+        }
+    ],
+    [
+        "Public Key",
+        {
+            "additions": 0,
+            "deletions": 0,
+            "changes": 0
+        }
+    ],
+    [
+        "Meson",
+        {
+            "additions": 61,
+            "deletions": 61,
+            "changes": 122
+        }
+    ],
+    [
+        "Go",
+        {
+            "additions": 0,
+            "deletions": 87,
+            "changes": 87
+        }
+    ],
+    [
+        "Handlebars",
+        {
+            "additions": 1594,
+            "deletions": 1061,
+            "changes": 2655
+        }
+    ],
+    [
+        "Batchfile",
+        {
+            "additions": 0,
+            "deletions": 21,
+            "changes": 21
+        }
+    ],
+    [
+        "Protocol Buffer",
+        {
+            "additions": 40,
+            "deletions": 0,
+            "changes": 40
+        }
+    ]
+]
